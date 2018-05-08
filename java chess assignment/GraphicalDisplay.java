@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
  
-public class GraphicalDisplay extends JFrame{
+public class GraphicalDisplay extends JFrame implements Display {
 	 
 	public static final int DEFAULT_WIDTH = 1175;
 	public static final int DEFAULT_HEIGHT = 900;
@@ -25,6 +25,9 @@ public class GraphicalDisplay extends JFrame{
 	
 	add(jp, BorderLayout.CENTER);	
 	}
+	
+	public void displayBoard(Pieces myPieces){		
+	} 
 	
 	public static void menu(JPanel jp){
 
@@ -506,10 +509,5 @@ public class GraphicalDisplay extends JFrame{
 			System.exit(0);
 		}
 	}	
-	public static void main(String args []){
-		chessBoard.displayBoard();
-		chessBoard.setLocationRelativeTo(null);  
-		chessBoard.setVisible(true);
-		chessBoard.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+
 }

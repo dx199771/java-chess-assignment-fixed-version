@@ -48,7 +48,7 @@ public class AggressivePlayer extends Player{
 				genetateTextMove(b,d);
 				movingPlayer =p1;
 
-			}w
+			}
 		gameOver = d.gameOver(b);	
 		}
 		

@@ -30,7 +30,6 @@ public class Move {
 		}
 		if(p != null && piece.availableMoves()!=null){
 			for(int i = 0 ; i <piece.availableMoves().size(); i++) {
-				System.out.println(p.availableMoves().get(i).getOpponent() +"AND"+ m.getOpponent());
 				if(p.availableMoves().get(i).getOldX() == m.getOldX() 
 					&& p.availableMoves().get(i).getOldY() == m.getOldY() 
 				&& p.availableMoves().get(i).getNewX() == m.getNewX() 
