@@ -5,19 +5,41 @@ import assignment2018.codeprovided.Piece;
 import assignment2018.codeprovided.PieceCode;
 import java.util.*;
 
-
+/**
+* Bishop Class
+* Bishop piece that stored 
+* available moves of Bishop
+* @author Xu Dong
+* @version 1.0 09/05/2018
+*/
 public class Bishop extends Piece {
-	
+	// constructor
+	/**
+	 * Constructor.
+	 * @param ix old x-axis
+	 * @param iy old y-axis
+	 * @param c piece color 
+	 * @param b	board which display the pieces
+	 */
 	public Bishop(int ix, int iy, int c, Board b){
 		super(PieceCode.BISHOP, ix, iy, c, b);
 	}
 	
+	/**
+	 * available moves of bishop
+	 * @return array of bishop available moves
+	 */
     public ArrayList<Move> availableMoves() {
         if (getColour() == PieceCode.WHITE)
             return whiteBishop();
         else
             return blackBishop();
     }
+    
+	/**
+	 * white bishop available moves
+	 * @return array of white bishop available moves
+	 */
 	private ArrayList<Move> whiteBishop() {
         // obtain current co-ordinates
         int x = this.getX();
@@ -32,8 +54,10 @@ public class Bishop extends Piece {
 		
 		for(int i=1;i<=7;i++){
 			boolean flag = true;
+			//not occupied by opponent available move
 			if (bishopMove(x + i, y + i)) {
 				for(int j=1; j<i; j++){
+					//check if there are pieces in front
 					if(getBoard().occupied(x+j,y+j)){flag = false;}
 				}
 				if(flag == true){
@@ -42,6 +66,7 @@ public class Bishop extends Piece {
 				}
 			}
 			flag = true;
+			//occupied by opponent available move
 			if(occupiedByOpponent(x + i, y + i)){
 				for(int j=1; j<i; j++){
 					if(getBoard().occupied(x+j,y+j)){flag = false;}
@@ -127,13 +152,15 @@ public class Bishop extends Piece {
         return whiteMoves;
     }
 
-    // method to return Vector of legal moves for a black pawn
+    // method to return Vector of legal moves for a black Bishop
+	/**
+	 * black bishop available moves
+	 * @return array of black bishop available moves
+	 */
     private ArrayList<Move> blackBishop() {
         int x = this.getX();
         int y = this.getY();
 
-        // return null if the pawn is at the edge of the board, or if the
-        // next move takes it out of range
 
         ArrayList<Move> blackMoves = new ArrayList<Move>();
 
@@ -142,8 +169,10 @@ public class Bishop extends Piece {
 
 		for(int i=1;i<=7;i++){
 			boolean flag = true;
+			//not occupied by opponent available move
 			if (bishopMove(x + i, y + i)) {
 				for(int j=1; j<i; j++){
+					//check if there are pieces in front
 					if(getBoard().occupied(x+j,y+j)){flag = false;}
 				}
 				if(flag == true){
@@ -152,6 +181,7 @@ public class Bishop extends Piece {
 				}
 			}	
 			flag = true;
+			//occupied by opponent available move
 			if(occupiedByOpponent(x + i, y + i)){
 				for(int j=1; j<i; j++){
 					if(getBoard().occupied(x+j,y+j)){flag = false;}
@@ -235,7 +265,12 @@ public class Bishop extends Piece {
             return null;
         return blackMoves;
     }
-	
+    
+	/**
+	 * check if board occupied by opponent
+	 * @return true if occupied by opponent
+	 * @return false if not occupied by opponent
+	 */
 	private boolean occupiedByOpponent(int newX, int newY){
         if (!getBoard().outOfRange(newX, newY) && getBoard().occupied(newX, newY)
                 && (getBoard().getPiece(newX, newY).getColour() != this.getColour()))
@@ -244,6 +279,14 @@ public class Bishop extends Piece {
 			return false;
 	}
 	
+	/**
+	 * check if move available
+	 * not out of range
+	 * not occupied by another piece
+	 * or occupied by opponent piece
+	 * @return true if available
+	 * @return false if not available
+	 */
 	private boolean bishopMove(int newX, int newY){
 	    if (!getBoard().outOfRange(newX, newY) && !getBoard().occupied(newX, newY))
 			return true;
